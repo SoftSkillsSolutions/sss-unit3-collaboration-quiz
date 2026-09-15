@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Autoévaluation interactive sur la collaboration et le travail d'équipe - Unité 3.">
+  <title>Êtes-vous un bon coéquipier? | Unité 3 - Collaboration</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="shell brand">
+      <img src="skillforce-logo.png" alt="Logo Simcoe Muskoka Skillforce">
+      <div class="unit-label">Unité 3<br>Collaboration</div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section id="intro-view" class="card">
+      <p class="quiet"><strong>Autoévaluation interactive</strong></p>
+      <h1>Êtes-vous un bon coéquipier?</h1>
+      <p class="lead">Dans chaque situation, choisissez la réaction qui ressemble le plus à ce que vous feriez <strong>habituellement</strong> au travail.</p>
+
+      <div class="intro-grid" aria-label="Aperçu de l'activité">
+        <div class="mini"><strong>10 situations</strong><span class="quiet">Des exemples réalistes du milieu de travail.</span></div>
+        <div class="mini"><strong>Environ 5 minutes</strong><span class="quiet">Une activité courte et simple.</span></div>
+        <div class="mini"><strong>Résultat personnel</strong><span class="quiet">Un bilan de cinq dimensions de collaboration.</span></div>
+      </div>
+
+      <div class="notice">
+        <strong>Important :</strong> ce n'est pas un examen. Il n'y a pas de « bonne note » à obtenir. Pour que le résultat soit utile, choisissez la réponse qui vous ressemble réellement, et non celle qui semble idéale.
+      </div>
+
+      <button id="start-btn" type="button" class="primary">Commencer l'autoévaluation</button>
+      <p class="privacy">Confidentialité : vos réponses restent uniquement dans votre navigateur. Ce site ne demande aucun nom, aucun courriel et n'enregistre pas vos réponses.</p>
+    </section>
+
+    <section id="quiz-view" class="card hidden" aria-live="polite">
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span id="progress-label">Situation 1 sur 10</span>
+          <span id="progress-percent">10 %</span>
+        </div>
+        <div class="progress-track" aria-hidden="true"><div id="progress-bar" class="progress-bar"></div></div>
+      </div>
+
+      <div id="dimension-pill" class="dimension-pill"></div>
+      <div id="scenario" class="scenario"></div>
+      <p class="quiet">Que feriez-vous le plus probablement?</p>
+      <div id="answers" class="answer-list" role="radiogroup" aria-label="Choix de réponse"></div>
+      <div id="reflection" class="reflection hidden"></div>
+
+      <div class="actions">
+        <button id="back-btn" type="button" class="secondary">Précédent</button>
+        <button id="next-btn" type="button" class="primary" disabled>Continuer</button>
+      </div>
+    </section>
+
+    <section id="results-view" class="card hidden" aria-live="polite">
+      <p class="quiet"><strong>Votre bilan de collaboration</strong></p>
+      <h2 id="result-title"></h2>
+      <div class="score-row"><div id="score" class="big-score">0</div><div class="out-of">sur 20</div></div>
+      <div id="result-summary" class="result-summary"></div>
+
+      <h3>Vos cinq dimensions</h3>
+      <p class="quiet">Chaque dimension est notée sur 4. Le but est de repérer vos forces et une habitude que vous pourriez développer.</p>
+      <div id="dimension-results" class="dimension-results"></div>
+
+      <div class="two-col">
+        <div class="result-box">
+          <h3>Une force à conserver</h3>
+          <p id="strength"></p>
+        </div>
+        <div class="result-box">
+          <h3>Votre prochain petit défi</h3>
+          <p id="challenge"></p>
+        </div>
+      </div>
+
+      <div class="notice" style="margin-top:22px">
+        <strong>Question de réflexion :</strong><br>
+        Quel comportement pourriez-vous pratiquer dès votre prochaine activité d'équipe pour devenir un meilleur coéquipier?
+      </div>
+
+      <div class="actions result-actions">
+        <button id="restart-btn" type="button" class="secondary">Recommencer</button>
+        <button id="print-btn" type="button" class="primary">Imprimer ou enregistrer mon bilan</button>
+      </div>
+      <p class="privacy">Ce résultat est une autoévaluation à des fins d'apprentissage. Il ne constitue pas une évaluation professionnelle ou psychométrique.</p>
+    </section>
+  </main>
+
+  <footer>Simcoe Muskoka Skillforce • Unité 3 — Collaboration</footer>
+
+  <script src="quiz.js"></script>
+</body>
+</html>
