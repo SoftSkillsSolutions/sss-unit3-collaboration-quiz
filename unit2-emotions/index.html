@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Soft Skills Solutions — Quiz sur les expressions faciales</title>
+<style>
+:root{--b:#168fd1;--bd:#0b5e93;--ink:#1d2e3a;--muted:#607487;--line:#d7e3eb;--soft:#eef7fc;--ok:#edf8ef;--bad:#fff2f1}
+*{box-sizing:border-box}body{margin:0;background:#f4f8fb;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+.shell{max-width:1180px;margin:auto;background:#fff;min-height:100vh;box-shadow:0 8px 26px rgba(0,0,0,.06)}
+header{display:flex;gap:24px;align-items:center;padding:20px 24px;border-bottom:1px solid var(--line)}
+.logo{width:330px;max-width:38vw;height:auto;object-fit:contain}
+h1{margin:0;color:var(--bd);font-size:clamp(28px,3vw,42px)}
+header p{margin:6px 0 0;color:var(--muted);font-size:18px;line-height:1.45}
+main{padding:24px}.pr{display:flex;gap:14px;align-items:center;margin-bottom:20px}
+.bar{height:12px;background:#e8f0f5;border-radius:99px;overflow:hidden;flex:1}
+.fill{height:100%;background:linear-gradient(90deg,var(--bd),var(--b));width:10%;transition:.2s}
+.count{font-weight:700;color:var(--bd);white-space:nowrap}
+.grid{display:grid;grid-template-columns:minmax(320px,.95fr) minmax(380px,1.05fr);gap:26px;align-items:start}
+.pic{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#eef2f5}
+.pic img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.tip{margin-top:12px;background:var(--soft);border-radius:14px;padding:15px 16px;line-height:1.5;color:#375269}
+.card{border:1px solid var(--line);border-radius:18px;padding:22px}
+.tag{display:inline-block;background:var(--soft);color:var(--bd);font-weight:700;padding:8px 12px;border-radius:999px;margin-bottom:14px}
+.scenario{background:#f7fbfe;border:1px solid var(--line);border-radius:14px;padding:14px 15px;color:#3c5367;line-height:1.5}
+.question{font-size:28px;line-height:1.2;color:var(--bd);margin:18px 0 16px}
+.options{display:grid;gap:11px}.option{width:100%;text-align:left;border:1px solid #c8d5df;background:#fff;border-radius:14px;padding:15px 16px;display:flex;gap:13px;align-items:center;font-size:18px;cursor:pointer}
+.option:hover{border-color:var(--b)}.option.selected{border:2px solid var(--b);background:#f4fbff}.option:disabled{cursor:default;opacity:.94}
+.bullet{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#e1f0fb;color:var(--bd);font-weight:700;flex:0 0 34px}
+.feedback{display:none;margin-top:18px;padding:16px;border-radius:14px;line-height:1.55}.feedback.good{display:block;background:var(--ok);border:1px solid #b7dec0}.feedback.bad{display:block;background:var(--bad);border:1px solid #edc3bf}
+.actions{display:flex;justify-content:space-between;gap:12px;margin-top:18px;flex-wrap:wrap}
+button{border:none;border-radius:12px;padding:13px 18px;font-size:17px;font-weight:700;cursor:pointer}
+button.primary{background:var(--b);color:#fff}button.secondary{background:#fff;color:var(--bd);border:1px solid var(--line)}button:disabled{opacity:.45;cursor:not-allowed}
+.results{display:none;border:1px solid var(--line);border-radius:18px;padding:34px}.results h2{margin-top:0;color:var(--bd);font-size:34px}.score{font-size:56px;font-weight:800;color:var(--b)}
+.footer{margin-top:20px;text-align:center;color:var(--muted);font-size:14px}
+@media(max-width:900px){header{flex-direction:column;align-items:flex-start}.logo{width:270px;max-width:80vw}.grid{grid-template-columns:1fr}.question{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<img class="logo" src="../Skillforce%20logo%20form.png" alt="Soft Skills Solutions">
+<div><h1>Quiz sur les expressions faciales</h1><p>Reconnaître les émotions au travail à partir des indices non verbaux.</p></div>
+</header>
+<main>
+<div class="pr"><div class="bar"><div class="fill" id="fill"></div></div><div class="count" id="count">Question 1 sur 10</div></div>
+<section id="quiz" class="grid">
+<div><div class="pic"><img id="photo" alt="Expression faciale dans un contexte de travail"></div><div class="tip"><strong>Conseil :</strong> Observez le visage, la posture et l’orientation du corps. Les indices non verbaux peuvent aider, mais le contexte et une conversation respectueuse restent essentiels.</div></div>
+<div class="card">
+<div class="tag">Activité d’apprentissage</div>
+<div class="scenario">Observez l’expression faciale et le langage corporel dans ce contexte de travail.</div>
+<h2 class="question">Quelle émotion ou attitude semble la plus probable?</h2>
+<div class="options" id="options"></div>
+<div class="feedback" id="feedback" aria-live="polite"></div>
+<div class="actions"><button class="secondary" id="prev" type="button">Question précédente</button><div><button class="primary" id="check" type="button" disabled>Valider ma réponse</button> <button class="primary" id="next" type="button" style="display:none">Question suivante</button></div></div>
+</div>
+</section>
+<section id="results" class="results">
+<h2>Activité terminée</h2><div id="score" class="score"></div><p id="resultText" style="font-size:18px;line-height:1.6"></p>
+<div class="tip"><strong>À retenir :</strong> Le but n’est pas de « lire dans les pensées ». Une bonne communication consiste à remarquer les indices, à considérer le contexte et à vérifier notre interprétation plutôt qu’à faire des suppositions.</div>
+<p><button class="primary" id="restart" type="button">Recommencer</button></p>
+</section>
+<div class="footer">Soft Skills Solutions — activité d’apprentissage, non diagnostique.</div>
+</main>
+</div>
+<script>window.SSS_IMAGES={};</script>
+<script src="img01.js"></script><script src="img02.js"></script><script src="img03.js"></script><script src="img04.js"></script><script src="img05.js"></script>
+<script src="img06.js"></script><script src="img07.js"></script><script src="img08.js"></script><script src="img09.js"></script><script src="img10.js"></script>
+<script>
+const qs=[
+{img:'q1',a:['préoccupé','surpris','confiant','sceptique'],c:1,f:'Les yeux grands ouverts, les sourcils relevés et la bouche ouverte sont des indices clairs de surprise.'},
+{img:'q2',a:['soulagé','sceptique','intéressé','frustré'],c:1,f:'Le sourcil relevé, le regard de côté et la bouche serrée peuvent suggérer du scepticisme ou du doute.'},
+{img:'q3',a:['frustré','soulagé','surpris','confiant'],c:0,f:'Le front fortement plissé, la tension du visage et la main à la tête sont compatibles avec la frustration.'},
+{img:'q4',a:['intéressé','mal à l’aise','découragé','sceptique'],c:2,f:'La posture affaissée, le regard vers le bas et la tête appuyée sur la main peuvent indiquer du découragement.'},
+{img:'q5',a:['confiant','incertain','préoccupé','mal à l’aise'],c:0,f:'La posture droite, le léger sourire et le regard assuré sont compatibles avec une attitude confiante.'},
+{img:'q6',a:['sceptique','soulagé','incertain','frustré'],c:2,f:'Le geste derrière la tête, les sourcils froncés et l’expression hésitante peuvent suggérer de l’incertitude.'},
+{img:'q7',a:['mal à l’aise','intéressé','confiant','surpris'],c:0,f:'Le sourire crispé, les épaules resserrées et le regard détourné peuvent indiquer qu’une personne se sent mal à l’aise.'},
+{img:'q8',a:['préoccupé','sceptique','soulagé','surpris'],c:0,f:'Le regard concentré, le front plissé et la main près du visage sont compatibles avec une préoccupation.'},
+{img:'q9',a:['frustré','intéressé','découragé','incertain'],c:1,f:'Le contact visuel, l’inclinaison du corps vers l’autre personne et l’expression attentive indiquent un intérêt réel.'},
+{img:'q10',a:['soulagé','mal à l’aise','sceptique','préoccupé'],c:0,f:'Les yeux fermés, l’expression détendue et la main sur la poitrine suggèrent du soulagement.'}
+];
+let i=0,score=0,choice=null,ans=Array(qs.length).fill(false),choices=Array(qs.length).fill(null);
+const $=x=>document.getElementById(x);
+function render(){const q=qs[i];choice=choices[i];$('photo').src=window.SSS_IMAGES[q.img];$('fill').style.width=((i+1)/qs.length*100)+'%';$('count').textContent='Question '+(i+1)+' sur '+qs.length;$('options').innerHTML='';$('feedback').className='feedback';$('feedback').innerHTML='';q.a.forEach((t,n)=>{const b=document.createElement('button');b.type='button';b.className='option'+(choice===n?' selected':'');b.disabled=ans[i];b.innerHTML='<span class="bullet">'+String.fromCharCode(65+n)+'</span><span>'+t+'</span>';b.onclick=()=>{if(ans[i])return;choice=n;choices[i]=n;render()};$('options').appendChild(b)});$('prev').disabled=i===0;$('check').disabled=choice===null||ans[i];$('check').style.display=ans[i]?'none':'';$('next').style.display=ans[i]?'':'none';$('next').textContent=i===qs.length-1?'Voir mon résultat':'Question suivante';if(ans[i]){const ok=choices[i]===q.c;$('feedback').className='feedback '+(ok?'good':'bad');$('feedback').innerHTML='<strong>'+(ok?'Bonne réponse.':'Pas tout à fait.')+'</strong><br>'+q.f}}
+$('check').onclick=()=>{if(choice===null||ans[i])return;ans[i]=true;if(choice===qs[i].c)score++;render()};
+$('next').onclick=()=>{if(i<qs.length-1){i++;render()}else finish()};
+$('prev').onclick=()=>{if(i>0){i--;render()}};
+function finish(){$('quiz').style.display='none';$('results').style.display='block';$('fill').style.width='100%';$('count').textContent='Terminé';$('score').textContent=score+' / '+qs.length;$('resultText').textContent=score>=9?'Excellent travail. Vous avez très bien reconnu les expressions présentées.':score>=7?'Très bon résultat. Vous reconnaissez plusieurs indices non verbaux avec justesse.':score>=5?'Bon début. Certaines expressions sont plus subtiles à interpréter.':'Cette activité montre à quel point les expressions peuvent être faciles à interpréter trop rapidement.'}
+$('restart').onclick=()=>{i=0;score=0;choice=null;ans=Array(qs.length).fill(false);choices=Array(qs.length).fill(null);$('results').style.display='none';$('quiz').style.display='grid';render()};
+render();
+</script>
+</body></html>
