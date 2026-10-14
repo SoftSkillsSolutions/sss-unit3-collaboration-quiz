@@ -63,25 +63,22 @@ button.primary{background:var(--b);color:#fff}button.secondary{background:#fff;c
 <div class="footer">Soft Skills Solutions — activité d’apprentissage, non diagnostique.</div>
 </main>
 </div>
-<script>window.SSS_IMAGES={};</script>
-<script src="img01.js"></script><script src="img02.js"></script><script src="img03.js"></script><script src="img04.js"></script><script src="img05.js"></script>
-<script src="img06.js"></script><script src="img07.js"></script><script src="img08.js"></script><script src="img09.js"></script><script src="img10.js"></script>
 <script>
 const qs=[
-{img:'q1',a:['préoccupé','surpris','confiant','sceptique'],c:1,f:'Les yeux grands ouverts, les sourcils relevés et la bouche ouverte sont des indices clairs de surprise.'},
-{img:'q2',a:['soulagé','sceptique','intéressé','frustré'],c:1,f:'Le sourcil relevé, le regard de côté et la bouche serrée peuvent suggérer du scepticisme ou du doute.'},
-{img:'q3',a:['frustré','soulagé','surpris','confiant'],c:0,f:'Le front fortement plissé, la tension du visage et la main à la tête sont compatibles avec la frustration.'},
-{img:'q4',a:['intéressé','mal à l’aise','découragé','sceptique'],c:2,f:'La posture affaissée, le regard vers le bas et la tête appuyée sur la main peuvent indiquer du découragement.'},
-{img:'q5',a:['confiant','incertain','préoccupé','mal à l’aise'],c:0,f:'La posture droite, le léger sourire et le regard assuré sont compatibles avec une attitude confiante.'},
-{img:'q6',a:['sceptique','soulagé','incertain','frustré'],c:2,f:'Le geste derrière la tête, les sourcils froncés et l’expression hésitante peuvent suggérer de l’incertitude.'},
-{img:'q7',a:['mal à l’aise','intéressé','confiant','surpris'],c:0,f:'Le sourire crispé, les épaules resserrées et le regard détourné peuvent indiquer qu’une personne se sent mal à l’aise.'},
-{img:'q8',a:['préoccupé','sceptique','soulagé','surpris'],c:0,f:'Le regard concentré, le front plissé et la main près du visage sont compatibles avec une préoccupation.'},
-{img:'q9',a:['frustré','intéressé','découragé','incertain'],c:1,f:'Le contact visuel, l’inclinaison du corps vers l’autre personne et l’expression attentive indiquent un intérêt réel.'},
-{img:'q10',a:['soulagé','mal à l’aise','sceptique','préoccupé'],c:0,f:'Les yeux fermés, l’expression détendue et la main sur la poitrine suggèrent du soulagement.'}
+{img:'q1.jpg',a:['préoccupé','surpris','confiant','sceptique'],c:1,f:'Les yeux grands ouverts, les sourcils relevés et la bouche ouverte sont des indices clairs de surprise.'},
+{img:'q2.jpg',a:['soulagé','sceptique','intéressé','frustré'],c:1,f:'Le sourcil relevé, le regard de côté et la bouche serrée peuvent suggérer du scepticisme ou du doute.'},
+{img:'q3.jpg',a:['frustré','soulagé','surpris','confiant'],c:0,f:'Le front fortement plissé, la tension du visage et la main à la tête sont compatibles avec la frustration.'},
+{img:'q4.jpg',a:['intéressé','mal à l’aise','découragé','sceptique'],c:2,f:'La posture affaissée, le regard vers le bas et la tête appuyée sur la main peuvent indiquer du découragement.'},
+{img:'q5.jpg',a:['confiant','incertain','préoccupé','mal à l’aise'],c:0,f:'La posture droite, le léger sourire et le regard assuré sont compatibles avec une attitude confiante.'},
+{img:'q6.jpg',a:['sceptique','soulagé','incertain','frustré'],c:2,f:'Le geste derrière la tête, les sourcils froncés et l’expression hésitante peuvent suggérer de l’incertitude.'},
+{img:'q7.jpg',a:['mal à l’aise','intéressé','confiant','surpris'],c:0,f:'Le sourire crispé, les épaules resserrées et le regard détourné peuvent indiquer qu’une personne se sent mal à l’aise.'},
+{img:'q8.jpg',a:['préoccupé','sceptique','soulagé','surpris'],c:0,f:'Le regard concentré, le front plissé et la main près du visage sont compatibles avec une préoccupation.'},
+{img:'q9.jpg',a:['frustré','intéressé','découragé','incertain'],c:1,f:'Le contact visuel, l’inclinaison du corps vers l’autre personne et l’expression attentive indiquent un intérêt réel.'},
+{img:'q10.jpg',a:['soulagé','mal à l’aise','sceptique','préoccupé'],c:0,f:'Les yeux fermés, l’expression détendue et la main sur la poitrine suggèrent du soulagement.'}
 ];
 let i=0,score=0,choice=null,ans=Array(qs.length).fill(false),choices=Array(qs.length).fill(null);
 const $=x=>document.getElementById(x);
-function render(){const q=qs[i];choice=choices[i];$('photo').src=window.SSS_IMAGES[q.img];$('fill').style.width=((i+1)/qs.length*100)+'%';$('count').textContent='Question '+(i+1)+' sur '+qs.length;$('options').innerHTML='';$('feedback').className='feedback';$('feedback').innerHTML='';q.a.forEach((t,n)=>{const b=document.createElement('button');b.type='button';b.className='option'+(choice===n?' selected':'');b.disabled=ans[i];b.innerHTML='<span class="bullet">'+String.fromCharCode(65+n)+'</span><span>'+t+'</span>';b.onclick=()=>{if(ans[i])return;choice=n;choices[i]=n;render()};$('options').appendChild(b)});$('prev').disabled=i===0;$('check').disabled=choice===null||ans[i];$('check').style.display=ans[i]?'none':'';$('next').style.display=ans[i]?'':'none';$('next').textContent=i===qs.length-1?'Voir mon résultat':'Question suivante';if(ans[i]){const ok=choices[i]===q.c;$('feedback').className='feedback '+(ok?'good':'bad');$('feedback').innerHTML='<strong>'+(ok?'Bonne réponse.':'Pas tout à fait.')+'</strong><br>'+q.f}}
+function render(){const q=qs[i];choice=choices[i];$('photo').src=q.img;$('fill').style.width=((i+1)/qs.length*100)+'%';$('count').textContent='Question '+(i+1)+' sur '+qs.length;$('options').innerHTML='';$('feedback').className='feedback';$('feedback').innerHTML='';q.a.forEach((t,n)=>{const b=document.createElement('button');b.type='button';b.className='option'+(choice===n?' selected':'');b.disabled=ans[i];b.innerHTML='<span class="bullet">'+String.fromCharCode(65+n)+'</span><span>'+t+'</span>';b.onclick=()=>{if(ans[i])return;choice=n;choices[i]=n;render()};$('options').appendChild(b)});$('prev').disabled=i===0;$('check').disabled=choice===null||ans[i];$('check').style.display=ans[i]?'none':'';$('next').style.display=ans[i]?'':'none';$('next').textContent=i===qs.length-1?'Voir mon résultat':'Question suivante';if(ans[i]){const ok=choices[i]===q.c;$('feedback').className='feedback '+(ok?'good':'bad');$('feedback').innerHTML='<strong>'+(ok?'Bonne réponse.':'Pas tout à fait.')+'</strong><br>'+q.f}}
 $('check').onclick=()=>{if(choice===null||ans[i])return;ans[i]=true;if(choice===qs[i].c)score++;render()};
 $('next').onclick=()=>{if(i<qs.length-1){i++;render()}else finish()};
 $('prev').onclick=()=>{if(i>0){i--;render()}};
